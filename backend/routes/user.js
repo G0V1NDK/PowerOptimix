@@ -6,7 +6,12 @@ const { Configuration, OpenAIApi } = require("openai");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+let tempOutput = "";
+
+
+
+router.post("/", async (req, res) => {
+  console.log(req.body)
   const content = `
     Personalized Home Energy Advisor Recommendations:
 
@@ -96,7 +101,7 @@ router.get("/", async (req, res) => {
     appliance_upgrade_suggestions = appliance_upgrade_suggestions + "<li>" + appliance_upgrade_suggestion + "</li>";
   }
 
-  const tempOutput = `
+  tempOutput = `
     <h2>As a Personalized Home Energy Advisor, I have analyzed your energy consumption patterns based on the information you provided. Here are my recommendations for reducing energy usage and increasing efficiency:</h2>
     <ol>
       <li>
@@ -112,10 +117,19 @@ router.get("/", async (req, res) => {
         <ul>${estimated_cost_savings}</ul>
       </li>
     </ol>
-    <h3>Please note that these recommendations are tailored to your specific situation and preferences. Feel free to reach out if you have any questions or need further assistance.</h3>
   `;
 
   res.send(tempOutput);
 });
+
+router.get("/", async(req, res)=>{
+  try{
+    return res.status(200).json(tempOutput);
+  }catch(err){
+    return res.status(400).json(err.message);
+  }
+
+})
+
 
 module.exports = router;

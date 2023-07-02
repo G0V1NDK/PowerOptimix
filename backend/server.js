@@ -1,10 +1,13 @@
 const express = require("express");
+const cors = require("cors");
 
 const userRoutes = require("./routes/user");
 
 const app = express();
 
 // Parse incoming request bodies
+app.use(cors());
+app.use(express.json({extended: true}));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(userRoutes);

@@ -9,8 +9,20 @@ import {
   FormErrorMessage,
   Input,
 } from "@chakra-ui/react";
+import axios from 'axios';
 
 const ApplianceForm = () => {
+
+  const postData = async(data) => {
+    try{
+      const value = await axios.post(`http://localhost:3000/`, data);
+      
+      console.log(value);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   const validateName = (value) => {
     let error;
     if (!value) {
@@ -66,6 +78,7 @@ const ApplianceForm = () => {
       }}
       onSubmit={(values, actions) => {
         console.log(values);
+        postData(values);
         setTimeout(() => {
             actions.setSubmitting(false);
         //   if (Object.keys(actions.errors).length === 0) {
@@ -196,7 +209,7 @@ const ApplianceForm = () => {
             colorScheme="teal"
             isLoading={props.isSubmitting}
             type="submit"
-            // onClick={() => (props.values.appliances.length !== 4) ? alert("Please Complete the fields") : console.log(props)}
+            // onClick={postData}
           >
             Submit
           </Button>
