@@ -13,6 +13,7 @@ import axios from "axios";
 import { getData } from "../api";
 import { Heading } from "@chakra-ui/react";
 import { Skeleton, SkeletonCircle, SkeletonText, Box } from "@chakra-ui/react";
+import styled from "@emotion/styled";
 
 const ApplianceForm = () => {
   const [intialVal, setIntialVal] = useState([]);
@@ -209,7 +210,7 @@ const ApplianceForm = () => {
                       </FormControl>
 
                       {index > 0 && (
-                        <Button onClick={() => remove(index)}>Remove</Button>
+                        <Button onClick={() => remove(index)} style={{margin: "1rem 0rem 0 0"}}>Remove</Button>
                       )}
                     </div>
                   ))}
