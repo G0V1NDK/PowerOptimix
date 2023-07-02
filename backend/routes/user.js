@@ -1,13 +1,16 @@
 const express = require("express");
-
+const cors = require("cors");
 require("dotenv").config();
 
 const { Configuration, OpenAIApi } = require("openai");
 
 const router = express.Router();
-let finaldata={};
-router.post("/", async (req, res) => {
-  // console.log(req.body);
+let finaldata=[];
+
+router.use(cors());
+
+router.post("/send", async (req, res) => {
+  console.log(req.body);
   const EnteredContent=req.body.appliances;
   const EnteredBillamt=req.body.bill_amt;
 
@@ -51,17 +54,31 @@ router.post("/", async (req, res) => {
   
   const receivedResponseJSON = JSON.parse(receivedResponseString);
   
-   finaldata={
+  finaldata={
     energy_saving_tips: receivedResponseJSON.recommendations.energy_saving_tips,
     appliance_upgrade_suggestions: receivedResponseJSON.recommendations.appliance_upgrade_suggestions,
     estimated_cost_savings: receivedResponseJSON.recommendations.estimated_cost_savings
   }
-res.redirect('/');
-});
-router.get("/", async (req, res) => {
 
- res.send(finaldata);
- finaldata={};
+  console.log("FinalData at Post")
+  console.log(finaldata);
+  res.redirect('/getInfo');
+// res.redirect('/se');
+});
+
+router.get("/getInfo", async (req, res) => {
+
+  try{
+    // const myData = await finaldata;
+    console.log("GetInfo")
+    console.log(finaldata);
+    return res.status(200).json(finaldata);
+  }catch(err){
+    console.log("backend getInfo");
+    return res.status(500).json(err.message);
+  }
+//  res.send(finaldata);
+//  finaldata=[];
 });
 
 module.exports = router;

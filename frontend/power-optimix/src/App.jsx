@@ -6,6 +6,7 @@ import { Heading } from "@chakra-ui/react";
 // import { color } from "framer-motion";
 import Footer from "./components/Footer";
 
+
 function App() {
   return (
     <>
@@ -28,12 +29,12 @@ function App() {
           <Forms />
         </div>
       </div>
-      <div className="output-outer">
+      {/* <div className="output-outer">
         <Heading size='lg'>Your Savings Here: </Heading>
         <div className="output-main">
           <Output />
         </div>
-      </div>
+      </div> */}
       <Footer/>
     </>
   );

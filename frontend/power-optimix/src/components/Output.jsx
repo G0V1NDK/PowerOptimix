@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getData } from "../api";
 
 const Output = ()=>{
     const[initalData, setIntialData] = useState([]);
 
     useEffect(()=>{
-        const getData = async(data)=>{
+        const fetchData = async()=>{
             try{
-                const value = await axios.get(`http://localhost:3000`, data);
-                console.log("backend");
-                console.log(value.data);
-                // setIntialData(value.data);
+               const result = await getData;
+               console.log("fetchData");
+               console.log(result.estimated_cost_savings);
+            //    setIntialData(result);
             }catch(err){
                 console.log(err);
             }
         }
-        getData();
+        fetchData();
     },[]);
     
 
