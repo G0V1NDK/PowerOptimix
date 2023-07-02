@@ -10,7 +10,7 @@ const Output = ()=>{
                 const value = await axios.get(`http://localhost:3000`, data);
                 console.log("backend");
                 console.log(value.data);
-                setIntialData(value.data);
+                // setIntialData(value.data);
             }catch(err){
                 console.log(err);
             }

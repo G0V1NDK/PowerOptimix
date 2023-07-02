@@ -17,7 +17,7 @@ const ApplianceForm = () => {
     try{
       const value = await axios.post(`http://localhost:3000/`, data);
       
-      console.log(value);
+      // console.log(value);
     }catch(err){
       console.log(err);
     }
@@ -50,7 +50,7 @@ const ApplianceForm = () => {
   const validatePowerConsumption = (value) => {
     let error;
     if (!value) {
-      error = "Power Consumption is required";
+      error = "Please enter power consumed in watts";
     }
     return error;
   };
@@ -126,7 +126,7 @@ const ApplianceForm = () => {
                     </FormControl>
 
                     <FormControl>
-                      <FormLabel>Appliance Age</FormLabel>
+                      <FormLabel>Appliance Age (in Years)</FormLabel>
                       <Field
                         name={`appliances.${index}.age`}
                         validate={validateAge}
@@ -149,7 +149,7 @@ const ApplianceForm = () => {
                     </FormControl>
 
                     <FormControl>
-                      <FormLabel>Power Consumption</FormLabel>
+                      <FormLabel>Power Consumption (in Watts)</FormLabel>
                       <Field
                         name={`appliances.${index}.powerConsumption`}
                         validate={validatePowerConsumption}
@@ -172,7 +172,7 @@ const ApplianceForm = () => {
                     </FormControl>
 
                     <FormControl>
-                      <FormLabel>Usage per Day</FormLabel>
+                      <FormLabel>Usage per Day (in hours)</FormLabel>
                       <Field
                         name={`appliances.${index}.usagePerDay`}
                         validate={validateUsagePerDay}
