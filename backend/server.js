@@ -5,9 +5,10 @@ const userRoutes = require("./routes/user");
 
 const app = express();
 
-// Parse incoming request bodies
 app.use(cors());
 app.use(express.json({extended: true}));
+
+// Parse incoming request bodies
 app.use(express.urlencoded({ extended: true }));
 
 app.use(userRoutes);
